@@ -5,22 +5,22 @@ use IEEE.NUMERIC_STD.ALL;
 entity add is
     Port (
         sw : in STD_LOGIC_VECTOR (7 downto 0);
-        seg0 : out STD_LOGIC_VECTOR (6 downto 0);  -- LED đơn vị
-        seg1 : out STD_LOGIC_VECTOR (6 downto 0)   -- LED hàng chục
+        seg0 : out STD_LOGIC_VECTOR (6 downto 0);  
+        seg1 : out STD_LOGIC_VECTOR (6 downto 0)   
     );
 end add;
 
 architecture Behavioral of add is
     signal A, B : unsigned(3 downto 0);
-    signal Sum : unsigned(4 downto 0);  -- Có thể vượt 15
+    signal Sum : unsigned(4 downto 0);  
     signal tens1, units1 : unsigned(3 downto 0);
 begin
-    -- Gán giá trị đầu vào
+   
     A <= unsigned(sw(3 downto 0));
     B <= unsigned(sw(7 downto 4));
     Sum <= resize(A, 5) + resize(B, 5);
 
-    -- Tách BCD
+  
     process (Sum)
         variable temp : integer;
     begin
@@ -29,7 +29,7 @@ begin
         units1 <= to_unsigned(temp mod 10, 4);
     end process;
 
-    -- Hiển thị LED 7 thanh - Catot chung (bit '1' tắt, bit '0' sáng)
+    
     process (units1)
     begin
         case units1 is
