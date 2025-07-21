@@ -33,6 +33,7 @@ begin
     process (units1)
     begin
         case units1 is
+            -- sử dụng led 7 thang với catot chung
                                   --abcdefg
             when "0000" => seg0 <= "1111110";  -- 0
             when "0001" => seg0 <= "0110000";  -- 1
